@@ -31,7 +31,7 @@ def analyze():
     plt.ylabel('Reward')
     plt.xlabel('Monitor Interval')
     plt.title('Reward Convergence, Throughput = 2.4 Mbps')
-    plt.savefig(graphs_dir + 'reward_graph_200.pdf')
+    plt.savefig(graphs_dir + 'reward_graph_200.png')
 
     plt.figure(1)
     plt.plot(test_rl_thpt_200["time_data"], np.array(test_rl_thpt_200["send_data"]) / 1e6, label='RL')
@@ -40,7 +40,7 @@ def analyze():
     plt.legend()
     plt.xlabel('Monitor Interval')
     plt.title('Send Rate: RL based vs Ordinary CC, Throughput = 2.4 Mbps')
-    plt.savefig(graphs_dir + 'send_graph_200.pdf')
+    plt.savefig(graphs_dir + 'send_graph_200.png')
 
     plt.figure(2)
     plt.plot(test_rl_thpt_200["time_data"], np.array(test_rl_thpt_200["thpt_data"]) / 1e6, label='RL')
@@ -49,7 +49,7 @@ def analyze():
     plt.legend()
     plt.xlabel('Monitor Interval')
     plt.title('Throughput: RL based vs Ordinary CC, Throughput = 2.4 Mbps')
-    plt.savefig(graphs_dir + 'thpt_graph_200.pdf')
+    plt.savefig(graphs_dir + 'thpt_graph_200.png')
 
     plt.figure(3)
     plt.plot(test_rl_thpt_200["time_data"], test_rl_thpt_200["latency_data"])
@@ -57,7 +57,7 @@ def analyze():
     plt.xlabel('Monitor Interval')
     plt.title('Latency, Throughput = 2.4 Mbps')
     plt.ylim((0.0, 0.3))
-    plt.savefig(graphs_dir + 'latency_graph_200.pdf')
+    plt.savefig(graphs_dir + 'latency_graph_200.png')
 
     plt.figure(4)
     plt.plot(test_rl_thpt_200["time_data"], test_rl_thpt_200["loss_data"])
@@ -65,7 +65,7 @@ def analyze():
     plt.xlabel('Monitor Interval')
     plt.title('Loss rate, Throughput = 2.4 Mbps')
     plt.ylim((0.0, 0.2))
-    plt.savefig(graphs_dir + 'loss_graph_200.pdf')
+    plt.savefig(graphs_dir + 'loss_graph_200.png')
 
     ########
     # 1000 #
@@ -78,7 +78,7 @@ def analyze():
     plt.ylabel('Reward')
     plt.xlabel('Monitor Interval')
     plt.title('Reward Convergence, Throughput = 12 Mbps')
-    plt.savefig(graphs_dir + 'reward_graph_1000.pdf')
+    plt.savefig(graphs_dir + 'reward_graph_1000.png')
 
     plt.figure(6)
     plt.plot(test_rl_thpt_1000["time_data"], np.array(test_rl_thpt_1000["send_data"]) / 1e6, label='RL')
@@ -87,7 +87,7 @@ def analyze():
     plt.legend()
     plt.xlabel('Monitor Interval')
     plt.title('Send Rate: RL based vs Ordinary CC, Throughput = 12 Mbps')
-    plt.savefig(graphs_dir + 'send_graph_1000.pdf')
+    plt.savefig(graphs_dir + 'send_graph_1000.png')
 
     plt.figure(7)
     plt.plot(test_rl_thpt_1000["time_data"], np.array(test_rl_thpt_1000["thpt_data"]) / 1e6, label='RL')
@@ -96,7 +96,7 @@ def analyze():
     plt.legend()
     plt.xlabel('Monitor Interval')
     plt.title('Throughput: RL based vs Ordinary CC, Throughput = 12 Mbps')
-    plt.savefig(graphs_dir + 'th_graph_1000.pdf')
+    plt.savefig(graphs_dir + 'th_graph_1000.png')
 
     plt.figure(8)
     plt.plot(test_rl_thpt_1000["time_data"], test_rl_thpt_1000["latency_data"])
@@ -104,7 +104,7 @@ def analyze():
     plt.xlabel('Monitor Interval')
     plt.title('Latency, Throughput = 12 Mbps')
     plt.ylim((0.0, 0.3))
-    plt.savefig(graphs_dir + 'latency_graph_1000.pdf')
+    plt.savefig(graphs_dir + 'latency_graph_1000.png')
 
     plt.figure(9)
     plt.plot(test_rl_thpt_1000["time_data"], test_rl_thpt_1000["loss_data"])
@@ -112,7 +112,7 @@ def analyze():
     plt.xlabel('Monitor Interval')
     plt.title('Loss rate, Throughput = 12 Mbps')
     plt.ylim((0.0, 0.2))
-    plt.savefig(graphs_dir + 'loss_graph_1000.pdf')
+    plt.savefig(graphs_dir + 'loss_graph_1000.png')
 
 
 if __name__ == '__main__':

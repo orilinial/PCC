@@ -12,7 +12,6 @@ class Policy(nn.Module):
 
         # actor's layer
         self.action_mean = nn.Linear(128, 1)
-        self.action_mean = nn.Linear(128, 1)
 
         # critic's layer
         self.value = nn.Linear(128, 1)
