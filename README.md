@@ -10,7 +10,7 @@ The network is simple: one hidden layer with 128 units for the actor, and one hi
 
 ### Results
 We ran a task similar to the one provided in PCC-RL paper, and received similar results:</br>
-![Throughput of RL vs TCP](results/graphs/th_graph_1000.pdf)
+![Throughput of RL vs TCP](results/graphs/th_graph_1000.png)
 
 ### Requirments
 * Python 3
