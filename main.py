@@ -19,10 +19,11 @@ eps = np.finfo(np.float32).eps.item()
 
 def select_action(state, model):
     state = torch.from_numpy(state).float()
-    action_mean, action_log_var, state_value = model(state)
+    # action_mean, action_log_var, state_value = model(state)
+    action_mean, state_value = model(state)
 
     # create a categorical distribution over the list of probabilities of actions
-    m = normal.Normal(action_mean, torch.exp(0.5 * action_log_var))
+    m = normal.Normal(action_mean, 5.0 * torch.ones_like(action_mean))
 
     # and sample an action using the distribution
     action = m.sample()
@@ -34,7 +35,7 @@ def select_action(state, model):
     return action.item()
 
 
-def finish_episode(optimizer, model):
+def finish_episode(args, optimizer, model):
     """
     Training code. Calcultes actor and critic loss and performs backprop.
     """
@@ -115,7 +116,7 @@ def main(args):
         running_reward = 0.05 * ep_reward + (1 - 0.05) * running_reward
 
         # perform backprop
-        finish_episode(optimizer, model)
+        finish_episode(args, optimizer, model)
         # total_ep_rewards.append(ep_reward)
 
         # log results
@@ -142,7 +143,7 @@ if __name__ == '__main__':
     parser.add_argument('--log-interval', type=int, default=10, metavar='N',
                         help='interval between training status logs (default: 10)')
     parser.add_argument('--episodes', type=int, default=10000)
-    parser.add_argument('--learning-rate', '-lr', type=float, default=1e-3)
+    parser.add_argument('--learning-rate', '-lr', type=float, default=1e-4)
     parser.add_argument('--bandwidth', '-bw', type=float, default=2.4, help='Network bandwidth in Mbps')
     parser.add_argument('--reward', type=str, default='latency', choices=['throughput', 'latency'],
                         help='RL agent\'s goal')

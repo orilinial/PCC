@@ -471,7 +471,7 @@ class SimulatedNetworkEnv(gym.Env):
 
     def create_new_links_and_senders(self, max_bw, test):
         if test:
-            bw    = (max_bw * (1000 * 1000))/(BYTES_PER_PACKET * 8)
+            bw    = int((max_bw * (1000 * 1000))/(BYTES_PER_PACKET * 8))
             lat   = 0.1
             queue = 10
             loss  = 0.01

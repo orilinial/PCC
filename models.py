@@ -12,6 +12,7 @@ class Policy(nn.Module):
 
         # actor's layer
         self.action_mean = nn.Linear(128, 1)
+        self.action_log_var = nn.Linear(128, 1)
 
         # critic's layer
         self.value = nn.Linear(128, 1)
@@ -31,7 +32,7 @@ class Policy(nn.Module):
         # actor: choses action to take from state s_t
         # by returning probability of each action
         action_mean = self.action_mean(x)
-        action_log_var = self.action_mean(x)
+        # action_log_var = self.action_log_var(x)
 
         # critic: evaluates being in the state s_t
         state_value = self.value(x)
@@ -39,4 +40,4 @@ class Policy(nn.Module):
         # return values for both actor and critic as a tupel of 2 values:
         # 1. a list with the probability of each action over the action space
         # 2. the value from state s_t
-        return action_mean, action_log_var, state_value
+        return action_mean, state_value  #  action_log_var, state_value

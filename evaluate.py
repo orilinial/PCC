@@ -3,6 +3,7 @@ import torch
 import gym
 import models
 import argparse
+import numpy as np
 
 
 def evaluate_model(args, episode_num, model=None, save_json=False):
@@ -16,12 +17,13 @@ def evaluate_model(args, episode_num, model=None, save_json=False):
 
     state = env.reset(reward=args.reward, max_bw=args.bandwidth, test=True)
     ep_reward = 0
-
     for t in range(1, 10000):
 
         # select action from policy
         state = torch.from_numpy(state).float()
-        action_mean, _, _ = model(state)
+        # action_mean, action_log_var, _ = model(state)
+        action_mean, _ = model(state)
+        # statistics.append(action_log_var.item())
         action = action_mean.item()
 
         # take the action
@@ -50,7 +52,7 @@ if __name__ == '__main__':
                         help='interval between training status logs (default: 10)')
     parser.add_argument('--episodes', type=int, default=1000)
     parser.add_argument('--learning-rate', '-lr', type=float, default=1e-3)
-    parser.add_argument('--bandwidth', '-bw', type=float, default=2.4, help='Network bandwidth in Mbps')
+    parser.add_argument('--bandwidth', '-bw', type=float, default=12.0, help='Network bandwidth in Mbps')
     parser.add_argument('--reward', type=str, default='throughput', help='RL agent\'s goal')
     args = parser.parse_args()
 
