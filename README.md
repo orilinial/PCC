@@ -6,11 +6,11 @@ In this project we implemented the PCC-RL agent, to learn how to adapt the clien
 
 ### Implementation
 We implemented the RL agent using a standard Actor-Critic method, with pytorch. </br>
-The network is simple: one hidden layer with 128 units for the actor, and one hidden layer with 128 hidden units for the critic. The given states are history of 10 monitor-intervals statictics, with specific features (as described in the original paper).
+The network is simple: one hidden layer with 128 units for the actor and critic. The actor learns the mean of the policy distribution as a Normal distribution, with a predifined variance. The given states are history of 10 monitor-intervals statictics, with specific features (as described in the original paper).
 
 ### Results
 We ran a task similar to the one provided in PCC-RL paper, and received similar results:</br>
-![Throughput of RL vs TCP](results/graphs/th_graph_1000.png)
+![Throughput of RL vs TCP](results/graphs/thpt_send_rl_tcp_10.png)
 
 ### Requirments
 * Python 3
