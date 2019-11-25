@@ -85,8 +85,7 @@ def main(args):
     env = gym.make('PccNs-v0')
     env.seed(args.seed)
     torch.manual_seed(args.seed)
-    # total_ep_rewards = []
-    # total_test_rewards = []
+    total_test_rewards = []
 
     running_reward = 10
 
@@ -117,13 +116,12 @@ def main(args):
 
         # perform backprop
         finish_episode(args, optimizer, model)
-        # total_ep_rewards.append(ep_reward)
 
         # log results
         if i_episode % args.log_interval == 0:
             # save_json = True if i_episode % (args.log_interval * 10) == 0 else False
             test_reward = evaluate.evaluate_model(args, i_episode, model, save_json=False)
-            # total_test_rewards.append(test_reward)
+            total_test_rewards.append(test_reward)
 
             torch.save(model.state_dict(), 'ac_model_%s.pkl' % args.reward)
 
@@ -131,7 +129,7 @@ def main(args):
                   i_episode, ep_reward, running_reward, test_reward))
 
     # torch.save(total_ep_rewards, 'total_ep_rewards.pkl')
-    # torch.save(total_test_rewards, 'total_test_rewards.pkl')
+    torch.save(total_test_rewards, 'total_test_rewards.pkl')
 
 
 if __name__ == '__main__':
@@ -144,7 +142,7 @@ if __name__ == '__main__':
                         help='interval between training status logs (default: 10)')
     parser.add_argument('--episodes', type=int, default=10000)
     parser.add_argument('--learning-rate', '-lr', type=float, default=1e-4)
-    parser.add_argument('--bandwidth', '-bw', type=float, default=2.4, help='Network bandwidth in Mbps')
+    parser.add_argument('--bandwidth', '-bw', type=float, default=5, help='Network bandwidth in Mbps')
     parser.add_argument('--reward', type=str, default='latency', choices=['throughput', 'latency'],
                         help='RL agent\'s goal')
 

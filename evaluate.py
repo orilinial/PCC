@@ -44,16 +44,11 @@ def evaluate_model(args, episode_num, model=None, save_json=False):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='PyTorch actor-critic example')
-    parser.add_argument('--gamma', type=float, default=0.99, metavar='G',
-                        help='discount factor (default: 0.99)')
     parser.add_argument('--seed', type=int, default=543, metavar='N',
                         help='random seed (default: 543)')
-    parser.add_argument('--log-interval', type=int, default=10, metavar='N',
-                        help='interval between training status logs (default: 10)')
-    parser.add_argument('--episodes', type=int, default=1000)
-    parser.add_argument('--learning-rate', '-lr', type=float, default=1e-3)
-    parser.add_argument('--bandwidth', '-bw', type=float, default=12.0, help='Network bandwidth in Mbps')
-    parser.add_argument('--reward', type=str, default='throughput', help='RL agent\'s goal')
+    parser.add_argument('--bandwidth', '-bw', type=float, default=10.0, help='Network bandwidth in Mbps')
+    parser.add_argument('--reward', type=str, default='latency', choices=['throughput', 'latency'],
+                        help='RL agent\'s goal')
     args = parser.parse_args()
 
     ep_reward = evaluate_model(args, -1, save_json=True)

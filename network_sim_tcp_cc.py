@@ -389,7 +389,7 @@ class SimulatedNetworkEnv(gym.Env):
         #print(sender_obs)
         return sender_obs
 
-    def step(self, action):
+    def step(self):
         reward = self.net.run_for_dur(self.run_dur)
         for sender in self.senders:
             sender.record_run()
@@ -450,7 +450,7 @@ class SimulatedNetworkEnv(gym.Env):
         self.episodes_run += 1
         # if self.episodes_run > 0 and self.episodes_run % 100 == 0:
         #     self.dump_events_to_file("pcc_env_log_run_%d.json" % self.episodes_run)
-        self.event_record = {"Events":[]}
+        self.event_record = {"Events": []}
         self.net.run_for_dur(self.run_dur)
         self.net.run_for_dur(self.run_dur)
         self.reward_ewma *= 0.99
