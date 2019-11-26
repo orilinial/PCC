@@ -1,11 +1,8 @@
 import argparse
 import gym
 import numpy as np
-from itertools import count
 from collections import namedtuple
-
 import torch
-import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 from torch.distributions import normal
@@ -41,9 +38,9 @@ def finish_episode(args, optimizer, model):
     """
     R = 0
     saved_actions = model.saved_actions
-    policy_losses = [] # list to save actor (policy) loss
-    value_losses = [] # list to save critic (value) loss
-    returns = [] # list to save the true values
+    policy_losses = []  # list to save actor (policy) loss
+    value_losses = []  # list to save critic (value) loss
+    returns = []  # list to save the true values
 
     # calculate the true value using rewards returned from the environment
     for r in model.rewards[::-1]:
@@ -119,7 +116,6 @@ def main(args):
 
         # log results
         if i_episode % args.log_interval == 0:
-            # save_json = True if i_episode % (args.log_interval * 10) == 0 else False
             test_reward = evaluate.evaluate_model(args, i_episode, model, save_json=False)
             total_test_rewards.append(test_reward)
 
@@ -128,7 +124,6 @@ def main(args):
             print('Episode {}\tLast reward: {:.2f}\tAverage reward: {:.2f}, Test reward: {:.2f}'.format(
                   i_episode, ep_reward, running_reward, test_reward))
 
-    # torch.save(total_ep_rewards, 'total_ep_rewards.pkl')
     torch.save(total_test_rewards, 'total_test_rewards.pkl')
 
 
@@ -143,7 +138,7 @@ if __name__ == '__main__':
     parser.add_argument('--episodes', type=int, default=10000)
     parser.add_argument('--learning-rate', '-lr', type=float, default=1e-4)
     parser.add_argument('--bandwidth', '-bw', type=float, default=5, help='Network bandwidth in Mbps')
-    parser.add_argument('--reward', type=str, default='latency', choices=['throughput', 'latency'],
+    parser.add_argument('--reward', type=str, default='throughput', choices=['throughput', 'latency'],
                         help='RL agent\'s goal')
 
     args = parser.parse_args()
